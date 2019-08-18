@@ -4,3 +4,4 @@ from .secrets_keys import (
     get_django_secret_key,
 )
 from .database_urls import *
+from .view_decorator import *
