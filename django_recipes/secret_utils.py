@@ -49,6 +49,7 @@ def get_secret_key(name: str, allow_null=False):
     :rtype: Optional[str]
 
     :raises KeyError: If no suitable value for secret could be found
+    :raises AssertionError: If secret is an empty string value
     """
 
     secret_file_env_varname = re.sub(r'\W+', '_', name).upper()
@@ -57,13 +58,16 @@ def get_secret_key(name: str, allow_null=False):
     secret_file_path = os.getenv(secret_env_varname)
     secret_from_file = None
 
+    secret_from_env = os.getenv(secret_file_env_varname)
+
+    if secret_from_env is not None:
+        assert len(secret_from_env) >= 1
+
     if secret_file_path:
-        if not os.path.isfile(secret_file_path) or not os.access(secret_file_path, os.R_OK):
-            raise PermissionError()
         with open(secret_file_path, 'r') as secret_file_path:
             secret_from_file = secret_file_path.read()
 
-    secret_from_env = os.getenv(secret_file_env_varname)
+        assert len(secret_from_file) >= 1
 
     if not allow_null and not secret_from_file and not secret_from_env:
         raise KeyError("Unable to find a suitable secret value for secret")

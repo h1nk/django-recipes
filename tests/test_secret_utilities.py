@@ -58,3 +58,10 @@ class TestGettingSecretFromPreferredLocation(TestCase):
         del os.environ['SOME_SECRET_KEY']
 
         self.assertIsNone(get_secret_key('SOME_SECRET_KEY', allow_null=True))
+
+    def test_getting_secret_when_value_is_empty_string(self):
+        os.environ['SOME_SECRET_KEY'] = ''
+        self.assertRaises(AssertionError, get_secret_key, 'SOME_SECRET_KEY')
+
+        os.environ['SOME_SECRET_KEY_FILE'] = '/dev/null'
+        self.assertRaises(AssertionError, get_secret_key, 'SOME_SECRET_KEY')
