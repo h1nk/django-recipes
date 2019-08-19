@@ -57,7 +57,9 @@ def get_secret_key(name: str, allow_null=False):
     secret_file_path = os.getenv(secret_env_varname)
     secret_from_file = None
 
-    if secret_file_path and os.access(secret_file_path, os.R_OK) and os.path.isfile(secret_file_path):
+    if secret_file_path:
+        if not os.path.isfile(secret_file_path) or not os.access(secret_file_path, os.R_OK):
+            raise PermissionError()
         with open(secret_file_path, 'r') as secret_file_path:
             secret_from_file = secret_file_path.read()
 
