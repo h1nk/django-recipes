@@ -9,7 +9,13 @@ setup(
     include_package_data=True,
     license='MIT',
     classifiers=[
+        'Environment :: Web Environment',
         'Framework :: Django',
         'Framework :: Django :: 2.2',
+        'Intended Audience :: Developers',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
 )
