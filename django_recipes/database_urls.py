@@ -9,15 +9,13 @@ __all__ = (
 
 def get_database_url(alias: str = 'default') -> str:
     """
-    This is a pretty big and messy hack. It would be much nicer if there were some utility functions internal to Django
-    that could be used for getting the database URL from a ``settings.DATABASES`` alias. This function is basically the
-    inverse functionality of the ``dj-database-url`` package (which is a required to be installed in order to call this
-    function), i.e. it will un-parse a database configuration from your Django settings into a database connection URL
-    string.
+    Get a database connection URL by unparsing a Django :setting:`DATABASES` alias. This function basically provides
+    the inverse functionality of the ``dj-database-url`` package (which is a required to be installed in order to
+    call this function).
 
-    :param alias: Django database alias. Default is "default"
+    :param alias: Django :doc:`database alias <topics/db/multi-db>` (default is ``default``)
     :type alias: str
-    :return: A database connection URL string
+    :return: Database connection URL
     :rtype: str
     """
 

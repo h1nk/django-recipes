@@ -11,6 +11,11 @@ class TestViewDecorator(TestCase):
     def setUp(self):
         self.urlpatterns = []
 
+        self.partial = '/test/'
+        # language=PythonRegExp
+        self.pattern = r'/\d{3}/'
+        self.view_name = 'test'
+
         class SomeView(TemplateView):
             pass
 
@@ -21,55 +26,46 @@ class TestViewDecorator(TestCase):
         self.some_view = some_view
 
     def test_configuring_url_path_for_class_based_view(self):
-        partial = '/test/'
 
         self.assertIs(
             self.SomeView,
-            path(self.urlpatterns, partial, name='test')(self.SomeView),
+            path(self.urlpatterns, self.partial, self.view_name)(self.SomeView),
         )
 
         self.assertEqual(
             repr(self.urlpatterns),
-            repr([urls.path('/test/', self.SomeView.as_view(), name='test')]),
+            repr([urls.path(self.partial, self.SomeView.as_view(), self.view_name)]),
         )
 
     def test_configuring_url_re_path_for_class_based_view(self):
-        # language=PythonRegExp
-        pattern = r'/\d{3}/'
-
         self.assertIs(
             self.SomeView,
-            re_path(self.urlpatterns, pattern, name='test')(self.SomeView),
+            re_path(self.urlpatterns, self.pattern, self.view_name)(self.SomeView),
         )
 
         self.assertEqual(
             repr(self.urlpatterns),
-            repr([urls.re_path(pattern, self.SomeView.as_view(), name='test')]),
+            repr([urls.re_path(self.pattern, self.SomeView.as_view(), self.view_name)]),
         )
 
     def test_configuring_url_path_for_function_based_view(self):
-        partial = '/test/'
-
         self.assertIs(
             self.some_view,
-            path(self.urlpatterns, partial, name='test')(self.some_view),
+            path(self.urlpatterns, self.partial, self.view_name)(self.some_view),
         )
 
         self.assertEqual(
             repr(self.urlpatterns),
-            repr([urls.path('/test/', self.some_view, name='test')]),
+            repr([urls.path(self.partial, self.some_view, self.view_name)]),
         )
 
     def test_configuring_url_re_path_for_function_based_view(self):
-        # language=PythonRegExp
-        pattern = r'/\d{3}/'
-
         self.assertIs(
-            self.SomeView,
-            re_path(self.urlpatterns, pattern, name='test')(self.some_view),
+            self.some_view,
+            re_path(self.urlpatterns, self.pattern, self.view_name)(self.some_view),
         )
 
         self.assertEqual(
             repr(self.urlpatterns),
-            repr([urls.re_path(pattern, self.some_view, name='test')]),
+            repr([urls.re_path(self.pattern, self.some_view, self.view_name)]),
         )
