@@ -27,6 +27,7 @@ def get_database_url(alias: str = 'default') -> str:
     # https://www.postgresql.org/docs/current/libpq-connect.html#id-1.7.3.8.3.6
     # Just simply use "postgresql://" for our URIs
     schemes['django.db.backends.postgresql'] = 'postgresql'
+    schemes['django.db.backends.postgresql_psycopg2'] = 'postgresql'
     # Get the specified database alias...
     database_dict = settings.DATABASES[alias]
     # As well as its database engine, name, login credentials and host/port
@@ -47,14 +48,19 @@ def get_database_url(alias: str = 'default') -> str:
 
     if host and port:
         # Only include the port if necessary
-        network_location = ':'.join((host, port))
+        network_location = ':'.join((host, str(port)))
     else:
         # Otherwise omit the default port
         network_location = host
 
-    # Build the network host part with username & password included
-    network_location = '@'.join((':'.join((user, password)) if user and password else user, network_location))
+    # Username & password delimited by a colon (only include password if needed)
+    user_and_pass = user + ':' + password if (user and password) else user
+    # Build the network location part with host, username & password components
+    network_location = '@'.join((user_and_pass, network_location))
+    # Optional query parameters
+    query_params = database_dict.get('OPTIONS')
+    query_params = urlencode(query_params) if query_params else None
     # And the rest of the connection URL parameters...
-    url_parts = (schemes[engine], network_location, name, None, urlencode(database_dict.get('OPTIONS')), None)
+    url_parts = (schemes[engine], network_location, name, None, query_params, None)
 
     return urlunparse(url_parts)
