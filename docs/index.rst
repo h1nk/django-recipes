@@ -22,3 +22,8 @@ Secret utilities
 
 .. autofunction:: django_recipes.get_random_secure_token
 .. autofunction:: django_recipes.get_secret_key
+
+MsgPack signing wrapper
+-----------------------
+
+.. autoclass:: django_recipes.MsgPackSerializer

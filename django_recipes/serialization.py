@@ -6,7 +6,10 @@ __all__ = (
 
 
 class MsgPackSerializer:
-    """Simple wrapper for MsgPack to be used in ``signing.dumps`` and ``signing.loads``."""
+    """
+    Simple wrapper for MsgPack to be used in :meth:`signing.dumps <django.core.signing.dumps>` and
+    :meth:`signing.loads <django.core.signing.dumps>`.
+    """
 
     @staticmethod
     def dumps(obj):
