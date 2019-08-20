@@ -7,6 +7,9 @@ setup(
     url='https://github.com/h1nk/',
     packages=find_packages(exclude=['tests', 'docs']),
     include_package_data=True,
+    install_requires=[
+        'Django',
+    ],
     license='MIT',
     classifiers=[
         'Environment :: Web Environment',
