@@ -16,5 +16,5 @@ class TestMsgPackSerializer(TestCase):
 
         json_data = signing.dumps(data)
 
-        self.assertLessEqual(json_data, msgpack_data)
+        self.assertLessEqual(len(msgpack_data), len(json_data))
         self.assertEqual(data, signing.loads(msgpack_data.replace('.', ':'), serializer=MsgPackSerializer))
