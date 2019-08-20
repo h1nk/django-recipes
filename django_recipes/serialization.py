@@ -1,5 +1,9 @@
 import msgpack
 
+__all__ = (
+    'MsgPackSerializer',
+)
+
 
 class MsgPackSerializer:
     """Simple wrapper for MsgPack to be used in ``signing.dumps`` and ``signing.loads``."""
