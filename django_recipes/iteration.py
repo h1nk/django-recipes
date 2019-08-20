@@ -2,15 +2,14 @@
 
 from itertools import islice
 
-from typing import Iterable
-
+from typing import Iterable, Iterator
 
 __all__ = (
     'group',
 )
 
 
-def group(iterable: Iterable, n: int = 2) -> Iterable:
+def group(iterable: Iterable, n: int = 2) -> Iterator[slice]:
     """
     Slice an iterable object into fixed maximum ``n`` length chunks and return each chunk of the original iterable on
     each generator iteration.
@@ -18,8 +17,8 @@ def group(iterable: Iterable, n: int = 2) -> Iterable:
     :param n: Slice chunk size
     :param iterable: Object sequence to slice
 
-    :return: Iterable generator of each chunk slice of the original sequence object.
-    :rtype: Generator
+    :return: Generator iterator of each chunk slice of the original sequence object.
+    :rtype: Iterator[slice]
     """
 
     it = iter(iterable)
