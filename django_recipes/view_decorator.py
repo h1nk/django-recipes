@@ -23,12 +23,14 @@ def _url(path_func: Callable[..., URLPattern], urlpatterns: List, partial: str, 
 
 def path(urlpatterns: List, partial: str, *args, **kwargs):
     """
+    Decorator to route a view into a URLConf instance using a simple path
 
-    :param urlpatterns:
+    :param urlpatterns: Django ``urlpatterns`` instance
     :type urlpatterns: list
-    :param partial:
+    :param partial: URL path
     :type partial: str
-    :raise AssertionError:
+    :raise AssertionError: If ``view`` is not a valid view function or class-based view that subclasses
+     :class:`django.views.View <django.views.generic.base.View>`
     """
 
     return _url(urls.path, urlpatterns, partial, *args, **kwargs)
@@ -36,12 +38,14 @@ def path(urlpatterns: List, partial: str, *args, **kwargs):
 
 def re_path(urlpatterns: List, partial: str, *args, **kwargs):
     """
+    Decorator to route a view into a URLConf instance using a regular expression path
 
-    :param urlpatterns:
-    :param partial:
-    :param args:
-    :param kwargs:
-    :raise AssertionError:
+    :param urlpatterns: Django ``urlpatterns`` instance
+    :type urlpatterns: list
+    :param partial: URL pattern
+    :type partial: str
+    :raise AssertionError: If ``view`` is not a valid view function or class-based view that subclasses
+     :class:`django.views.View <django.views.generic.base.View>`
     """
 
     return _url(urls.re_path, urlpatterns, partial, *args, **kwargs)
