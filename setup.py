@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='hink',
-    version=None,
+    version='0.0.1',
     author='hink',
     url='https://github.com/h1nk/django-recipes',
     packages=find_packages(exclude=['tests', 'docs']),
