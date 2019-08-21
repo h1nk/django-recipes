@@ -13,3 +13,9 @@ except ImportError:
     pass
 else:
     from .serialization import *
+try:
+    import django_redis
+except ImportError:
+    pass
+else:
+    from .queryset import *

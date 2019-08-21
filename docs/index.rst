@@ -27,3 +27,9 @@ MsgPack signing wrapper
 -----------------------
 
 .. autoclass:: django_recipes.MsgPackSerializer
+
+Redis sorted set QuerySet wrapper
+---------------------------------
+
+.. autoclass:: django_recipes.RedisSortedSet
+    :members:

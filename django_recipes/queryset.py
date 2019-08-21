@@ -6,20 +6,20 @@ __all__ = (
 
 
 class RedisSortedSet:
+    """
+    A QuerySet wrapper for redis sorted sets
+
+    :param redis: :class:`redis-py client <redis.Redis>` instance
+    :param key: Database key of sorted set
+    :param withscores: Whether to return the scores of the elements together with the elements
+    :param desc: Whether set members should be in descending lexicographical order or not
+    """
+
     def __init__(self, redis: Redis, key: str, withscores: bool = False, desc: bool = False):
-        """
-        A queryset wrapper for redis sorted sets
-
-        :param redis: redis-py client instance
-        :param key:
-        :param withscores:
-        :param desc:
-        """
-
-        self.redis: Redis = redis
-        self.key: str = key
-        self.withscores: bool = withscores
-        self.desc: bool = desc
+        self.redis = redis
+        self.key = key
+        self.withscores = withscores
+        self.desc = desc
 
     def __len__(self) -> int:
         return self.redis.zcard(self.key)

@@ -24,4 +24,5 @@ html_static_path = ['_static']
 intersphinx_mapping = {
     'py': ('https://docs.python.org/{0.major}.{0.minor}'.format(sys.version_info), None),
     'dj': ('https://docs.djangoproject.com/en/stable/', 'https://docs.djangoproject.com/en/stable/_objects/'),
+    'redis-py': ('https://redis-py.readthedocs.io/en/stable/', None),
 }
