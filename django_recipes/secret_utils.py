@@ -5,7 +5,7 @@ import string
 
 __all___ = (
     'get_random_secure_token',
-    'get_secret_key',
+    'get_secret',
 )
 
 
@@ -31,7 +31,7 @@ def get_random_secure_token(length: int = 32) -> str:
     return ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(length))
 
 
-def get_secret_key(name: str, allow_null=False):
+def get_secret(name: str, allow_null=False):
     """
     Get the value of a named secret by searching the following locations in this order:
 

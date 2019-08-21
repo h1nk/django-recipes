@@ -5,7 +5,7 @@ from tempfile import NamedTemporaryFile
 
 from django_recipes import (
     get_random_secure_token,
-    get_secret_key,
+    get_secret,
 )
 
 
@@ -37,31 +37,31 @@ class TestGettingSecretFromPreferredLocation(TestCase):
 
     def test_getting_secret_from_file(self):
         self.assertIsNotNone(self.secret_from_file)
-        self.assertIsNotNone(get_secret_key('SOME_SECRET_KEY'))
-        self.assertEqual(self.secret_from_file, get_secret_key('SOME_SECRET_KEY'))
+        self.assertIsNotNone(get_secret('SOME_SECRET_KEY'))
+        self.assertEqual(self.secret_from_file, get_secret('SOME_SECRET_KEY'))
 
     def test_getting_secret_from_environment_variable(self):
         del os.environ['SOME_SECRET_KEY_FILE']
 
         self.assertIsNotNone(self.secret_from_env)
-        self.assertIsNotNone(get_secret_key('SOME_SECRET_KEY'))
-        self.assertEqual(self.secret_from_env, get_secret_key('SOME_SECRET_KEY'))
+        self.assertIsNotNone(get_secret('SOME_SECRET_KEY'))
+        self.assertEqual(self.secret_from_env, get_secret('SOME_SECRET_KEY'))
 
     def test_getting_secret_while_not_allowing_null(self):
         del os.environ['SOME_SECRET_KEY_FILE']
         del os.environ['SOME_SECRET_KEY']
 
-        self.assertRaises(KeyError, get_secret_key, 'SOME_SECRET_KEY')
+        self.assertRaises(KeyError, get_secret, 'SOME_SECRET_KEY')
 
     def test_getting_secret_and_allow_null(self):
         del os.environ['SOME_SECRET_KEY_FILE']
         del os.environ['SOME_SECRET_KEY']
 
-        self.assertIsNone(get_secret_key('SOME_SECRET_KEY', allow_null=True))
+        self.assertIsNone(get_secret('SOME_SECRET_KEY', allow_null=True))
 
     def test_getting_secret_when_value_is_empty_string(self):
         os.environ['SOME_SECRET_KEY'] = ''
-        self.assertRaises(AssertionError, get_secret_key, 'SOME_SECRET_KEY')
+        self.assertRaises(AssertionError, get_secret, 'SOME_SECRET_KEY')
 
         os.environ['SOME_SECRET_KEY_FILE'] = '/dev/null'
-        self.assertRaises(AssertionError, get_secret_key, 'SOME_SECRET_KEY')
+        self.assertRaises(AssertionError, get_secret, 'SOME_SECRET_KEY')
