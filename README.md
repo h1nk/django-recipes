@@ -21,7 +21,7 @@ This is a small library package I made in an effort to eliminate the repetition 
 ## Installation
 
 ```bash
-$ pipenv install git+https://github.com/h1nk/django-recipes.git@stable#egg=django-recipes.git
+$ pipenv install git+https://github.com/h1nk/django-recipes.git@stable#egg=django-recipes
 ```
 
 Additionally, if you care to have access to the additional management commands then you must add the reusable app to your [`INSTALLED_APPS`](https://docs.djangoproject.com/en/stable/ref/settings/#installed-apps) in your Django project settings:
