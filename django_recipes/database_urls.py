@@ -1,6 +1,7 @@
 from urllib.parse import urlunparse, urlencode
 
 from django.conf import settings
+from dj_database_url import SCHEMES as DATABASE_SCHEMES
 
 __all__ = (
     'get_database_url',
@@ -19,10 +20,8 @@ def get_database_url(alias: str = 'default') -> str:
     :rtype: str
     """
 
-    from dj_database_url import SCHEMES as database_schemes
-
     # Invert dj-database-urls's protocol scheme dictionary
-    schemes = {v: k for k, v in database_schemes.items()}
+    schemes = {v: k for k, v in DATABASE_SCHEMES.items()}
     # The URI scheme designator for PostgreS can be either postgresql:// or postgres:// see:
     # https://www.postgresql.org/docs/current/libpq-connect.html#id-1.7.3.8.3.6
     # Just simply use "postgresql://" for our URIs
@@ -40,7 +39,7 @@ def get_database_url(alias: str = 'default') -> str:
     # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-TEST_NAME
     # https://docs.djangoproject.com/en/stable/ref/settings/#name
     # https://github.com/kennethreitz/dj-database-url/blob/master/dj_database_url.py#L75-L82
-    if engine == database_schemes['sqlite']:
+    if engine == DATABASE_SCHEMES['sqlite']:
         if name == ':memory:' or name is None:
             return 'sqlite://:memory:'
 
