@@ -28,12 +28,12 @@ Additionally, if you care to have access to the additional management commands t
 
 ```python
 INSTALLED_APPS = [
-    ...
+    ...,
     
     # NOTE: because some of the management commands provided by this package override default django-admin
     # commands you must insert the entry above Django's own apps
     'django_recipes',
     
-    ...
+    ...,
 ]
 ```
