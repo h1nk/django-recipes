@@ -3,11 +3,13 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='hink',
+    name='django-recipes',
     version='0.0.1',
     author='hink',
     url='https://github.com/h1nk/django-recipes',
-    packages=find_packages(exclude=['tests', 'docs']),
+    packages=find_packages(exclude=['tests', 'docs']) + [
+        'django_recipes/management/commands/',
+    ],
     include_package_data=True,
     install_requires=[
         'Django',
